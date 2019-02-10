@@ -49,15 +49,16 @@ GildedRose::~GildedRose() {
   Items = nullptr;
 }
 size_t GildedRose::size() {
-  int size = *(&Items + 1) - Items;
-  return size;
+  //int size = *(&Items + 1) - Items;
+  return sz_;
 }
-// Item& GildedRose::get(size_t index) {
-//   return Items[index];
-// }
-// void GildedRose::add(const Item& item) {
-//   Items.push_back(item);
-// }
+Item& GildedRose::get(size_t index) {
+  return Items[index];
+}
+void GildedRose::add(const Item& item) {
+  Items[sz_] = item;
+  sz_++;
+}
 // Item& GildedRose::operator[](size_t item) {
 //   return Items[item];
 // }

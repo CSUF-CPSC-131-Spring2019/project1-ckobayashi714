@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include <string>
 #include <vector>
 using namespace std;
@@ -21,33 +22,42 @@ Item::Item(string new_name, int new_sellIn, int new_quality)
 class GildedRose {
 private:
     // Add something to hold at least 10 items.
-    vector<Item> list_Items;
+    int* Items;
+    size_t sz_;
 
 public:
     GildedRose();
+    GildedRose(size_t size);
     ~GildedRose();
 
-    size_t size() const;
+    size_t size();
     Item& get(size_t);
     void add(const Item&);
 
     Item& operator[](size_t);
 };
 GildedRose::GildedRose() {
-  list_items(10);
+  Items = new int[10];
+  sz_ = 0;
+}
+GildedRose::GildedRose(size_t size) {
+  Items = new int[size];
+  sz_ = 0;
 }
 GildedRose::~GildedRose() {
-  delete list_Items;
+  delete[] Items;
+  Items = nullptr;
 }
-size_t GildedRose::size() const {
-	return list_Items.size();
+size_t GildedRose::size() {
+  int size = *(&Items + 1) - Items;
+  return size;
 }
-Item& GildedRose::get(size_t index) {
-	return list_Items[index];
-}
-void GildedRose::add(const Item& item) {
-	list_Items.push_back(item);
-}
-Item& GildedRose::operator[](size_t item) {
-	return list_Items[item];
-}
+// Item& GildedRose::get(size_t index) {
+//   return Items[index];
+// }
+// void GildedRose::add(const Item& item) {
+//   Items.push_back(item);
+// }
+// Item& GildedRose::operator[](size_t item) {
+//   return Items[item];
+// }

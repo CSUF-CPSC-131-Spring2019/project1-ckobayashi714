@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <stdexcept>
+//#include <vector>
 using namespace std;
 //using std::string;
 
@@ -20,9 +21,8 @@ Item::Item(string new_name, int new_sellIn, int new_quality)
 class GildedRose {
 private:
     // Add something to hold at least 10 items.
-    vector<Item> Items;
-    size_t sz_,
-           capacity_;
+    Item *Items;
+    size_t size_;
 
 public:
     GildedRose();
@@ -37,38 +37,37 @@ public:
 };
 // Default constructor
 GildedRose::GildedRose() {
-  sz_ = 0;
-  capacity_ = 0;
+  Items = new Item[10];
+   size_ = 0;
 }
 // Non-Defualt Constructor
 GildedRose::GildedRose(size_t size) {
-  sz_ = 0;
-  capacity_ = 0;
+  Items = new Item[size];
+  size_ = 0;
 }
 // Deconstructor - Deallocate memory
 GildedRose::~GildedRose() {
-  // delete[] Items;
-  // Items = nullptr;
+  delete[] Items;
+  Items = nullptr;
 }
-// Return the size of the current vector.
+// Return the size of the current vector
 size_t GildedRose::size() {
-  return sz_;
+  return size_;
 }
 // Retrieve the element at the specified index.
 // Utilize stdexcept to handle edge cases.
 Item& GildedRose::get(size_t index) {
-  if (!(index >= 0 && index < Items.size()))
+  if (!(index < size_))
     throw out_of_range("Error: Out of range.");
-  return Items.at(index);
+  return this->get(index);
 }
 // Insert an element at the next available index of the array.
-// Utilize stdexcept to handle edge cases.
 void GildedRose::add(const Item& item) {
-  Items.push_back(item);
-  sz_++;
+  Items[size_] = item;
+  size_++;
 }
 // Retrieve the element at the specified index.
 // Utilize stdexcept to handle edge cases.
-Item& GildedRose::operator[](size_t item) {
-  return get(item);
+Item& GildedRose::operator[](size_t index) {
+  return get(index);
 }

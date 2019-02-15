@@ -2,9 +2,7 @@
 
 #include <string>
 #include <stdexcept>
-//#include <vector>
 using namespace std;
-//using std::string;
 
 // This is already done for you.
 class Item {
@@ -12,11 +10,14 @@ public:
     string name;
     int sellIn;
     int quality;
+    Item();
     Item(string, int, int);
 };
+Item::Item(): name(""), sellIn(0), quality(0) {}
 Item::Item(string new_name, int new_sellIn, int new_quality)
 : name(new_name), sellIn(new_sellIn), quality(new_quality) {
 }
+
 // This class is incomplete.
 class GildedRose {
 private:
@@ -50,7 +51,7 @@ GildedRose::~GildedRose() {
   delete[] Items;
   Items = nullptr;
 }
-// Return the size of the current vector
+// Return the size of the current array
 size_t GildedRose::size() {
   return size_;
 }
@@ -59,7 +60,7 @@ size_t GildedRose::size() {
 Item& GildedRose::get(size_t index) {
   if (!(index < size_))
     throw out_of_range("Error: Out of range.");
-  return this->get(index);
+    return Items[index];
 }
 // Insert an element at the next available index of the array.
 void GildedRose::add(const Item& item) {

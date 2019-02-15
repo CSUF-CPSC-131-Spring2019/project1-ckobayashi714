@@ -39,7 +39,7 @@ public:
 // Default constructor
 GildedRose::GildedRose() {
   Items = new Item[10];
-   size_ = 0;
+  size_ = 0;
 }
 // Non-Defualt Constructor
 GildedRose::GildedRose(size_t size) {
@@ -60,7 +60,7 @@ size_t GildedRose::size() {
 Item& GildedRose::get(size_t index) {
   if (!(index < size_))
     throw out_of_range("Error: Out of range.");
-    return Items[index];
+  return Items[index];
 }
 // Insert an element at the next available index of the array.
 void GildedRose::add(const Item& item) {
